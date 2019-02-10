@@ -1,6 +1,23 @@
 var schedule = require('node-schedule');
 var nodemailer = require('nodemailer');
-const http = require('http');
+var http = require('http');
+var passport = require('passport')
+var FitbitStrategy = require('passport-fitbit').Strategy;
+
+
+/*
+    Authentication
+*/
+
+passport.use(new FitbitStrategy({
+    consumerKey: "22DC2M",
+    consumerSecret: "20809cf52f6d7e8f67084ce41bc13ed0",
+    callbackURL: "http://localhost/auth/fitbit/callback"
+  },
+  function(token, tokenSecret, profile, cb) {
+    return cb(null, profile);
+  }
+));
 
 /*
     Server
@@ -11,9 +28,16 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({key:"value"}));
+    res.send("The Fitbit data mailer is running!")
 })
+
+app.get('/auth/fitbit', (req, res) => {
+    passport.authenticate('fitbit')
+})
+
+app.get('/auth/fitbit/callback', (req, res) => {
+    passport.authenticate('fitbit', { failureRedirect: '/' });
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
