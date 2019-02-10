@@ -1,6 +1,26 @@
 var schedule = require('node-schedule');
-var http = require('http');
 var nodemailer = require('nodemailer');
+const http = require('http');
+
+/*
+    Server
+*/
+
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({key:"value"}));
+})
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
+/* 
+    E-mailer
+*/
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -15,19 +35,28 @@ var mailOptions = {
     to: 'grouppulsewatch@gmail.com',
     subject: 'Sending Email using Node.js',
     text: 'That was easy!'
-  };
+};
+
+/*
+    Scheduler
+*/
  
 var j = schedule.scheduleJob('5 * * * * *', function(){
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    http.get('http://localhost:3000', (resp) => {
+        let data = '';
+      
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+      
+        // The whole response has been received. Print out the result.
+        resp.on('end', () => {
+          console.log(JSON.parse(data));
+        });
+      
+      }).on("error", (err) => {
+        console.log("Error: " + err.message);
+      });
 });
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Group Pulse Watch is on!');
-}).listen(8080);
