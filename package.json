@@ -1,0 +1,24 @@
+{
+  "name": "grouppulsewatch",
+  "version": "1.0.0",
+  "description": "a server that sends Fitbit data through email",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iccir919/groupPulseWatch.git"
+  },
+  "keywords": [
+    "fitbit",
+    "email",
+    "server"
+  ],
+  "author": "Neil Ricci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iccir919/groupPulseWatch/issues"
+  },
+  "homepage": "https://github.com/iccir919/groupPulseWatch#readme"
+}
