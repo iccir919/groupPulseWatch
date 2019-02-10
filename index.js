@@ -1,14 +1,12 @@
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+var schedule = require('node-schedule');
+var http = require('http');
+ 
+var j = schedule.scheduleJob('5 * * * * *', function(){
+  console.log('The answer to life, the universe, and everything!');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Group Pulse Watch is on!');
+}).listen(8080);

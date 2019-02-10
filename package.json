@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/iccir919/groupPulseWatch/issues"
   },
-  "homepage": "https://github.com/iccir919/groupPulseWatch#readme"
+  "homepage": "https://github.com/iccir919/groupPulseWatch#readme",
+  "dependencies": {
+    "node-schedule": "^1.3.1"
+  }
 }
