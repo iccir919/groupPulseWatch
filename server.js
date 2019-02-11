@@ -88,7 +88,7 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
       user: 'grouppulsewatch@gmail.com',
-      pass: 'h3artRat3!'
+      pass: process.env['GMAIL_PASSWORD']
   }
 });
 
