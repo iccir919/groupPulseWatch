@@ -23,6 +23,7 @@
   "homepage": "https://github.com/iccir919/groupPulseWatch#readme",
   "dependencies": {
     "cool-ascii-faces": "^1.3.4",
+    "ejs": "^2.6.1",
     "express": "^4.16.4"
   }
 }
