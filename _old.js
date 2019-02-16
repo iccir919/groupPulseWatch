@@ -96,7 +96,7 @@ var transporter = nodemailer.createTransport({
     Scheduler
 */
  
-var j = schedule.scheduleJob('1 32 * * * *', function(){
+var j = schedule.scheduleJob('* 29 * * * *', function(){
   var instance = axios.create({
     headers: {"Authorization" : `Bearer ${accessTokenGlobal}`}
   });
